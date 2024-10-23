@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31019.35
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrossCuting", "CrossCuting", "{52AE2FAE-F970-4429-A8E7-BFBEE1EAA1B8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backend.CrossCuting.Helpers", "Backend.CrossCuting.Helpers\Backend.CrossCuting.Helpers.csproj", "{953A5C95-0D3D-4C69-9D64-97574493D2A0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{004A45A3-FC6F-4935-8C7B-AA780451BB61}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backend.Domain.Entities", "Backend.Domain.Entities\Backend.Domain.Entities.csproj", "{F4D83E93-537B-46FA-ABAD-B518BBA6B922}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestructure", "Infraestructure", "{B90EF13B-88F5-4EE8-85D7-90C4EB777CAF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backend.Infraestructure.Repository", "Backend.Infraestructure.Repository\Backend.Infraestructure.Repository.csproj", "{E14FD64D-FEA6-4C48-9381-C18597A38B80}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backend.Infraestructure.UnitOfWork", "Backend.Infraestructure.UnitOfWork\Backend.Infraestructure.UnitOfWork.csproj", "{D88D01CD-AEC3-4BCB-909F-7FB5A9625787}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backend.RestServices", "Backend.RestServices\Backend.RestServices.csproj", "{D459F562-BD2B-44A8-B22B-71BA1595317F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{953A5C95-0D3D-4C69-9D64-97574493D2A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{953A5C95-0D3D-4C69-9D64-97574493D2A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{953A5C95-0D3D-4C69-9D64-97574493D2A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{953A5C95-0D3D-4C69-9D64-97574493D2A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4D83E93-537B-46FA-ABAD-B518BBA6B922}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4D83E93-537B-46FA-ABAD-B518BBA6B922}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4D83E93-537B-46FA-ABAD-B518BBA6B922}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4D83E93-537B-46FA-ABAD-B518BBA6B922}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E14FD64D-FEA6-4C48-9381-C18597A38B80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E14FD64D-FEA6-4C48-9381-C18597A38B80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E14FD64D-FEA6-4C48-9381-C18597A38B80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E14FD64D-FEA6-4C48-9381-C18597A38B80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D88D01CD-AEC3-4BCB-909F-7FB5A9625787}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D88D01CD-AEC3-4BCB-909F-7FB5A9625787}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D88D01CD-AEC3-4BCB-909F-7FB5A9625787}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D88D01CD-AEC3-4BCB-909F-7FB5A9625787}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D459F562-BD2B-44A8-B22B-71BA1595317F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D459F562-BD2B-44A8-B22B-71BA1595317F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D459F562-BD2B-44A8-B22B-71BA1595317F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D459F562-BD2B-44A8-B22B-71BA1595317F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{953A5C95-0D3D-4C69-9D64-97574493D2A0} = {52AE2FAE-F970-4429-A8E7-BFBEE1EAA1B8}
+		{F4D83E93-537B-46FA-ABAD-B518BBA6B922} = {004A45A3-FC6F-4935-8C7B-AA780451BB61}
+		{E14FD64D-FEA6-4C48-9381-C18597A38B80} = {B90EF13B-88F5-4EE8-85D7-90C4EB777CAF}
+		{D88D01CD-AEC3-4BCB-909F-7FB5A9625787} = {B90EF13B-88F5-4EE8-85D7-90C4EB777CAF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7343CBC8-6013-4B95-8328-A4BA9686C8FA}
+	EndGlobalSection
+EndGlobal

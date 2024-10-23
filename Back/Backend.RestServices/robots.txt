@@ -1,0 +1,5 @@
+﻿User-agent: *
+Disallow: /Admin/
+Disallow: /Identity/
+Sitemap: https://example.com/sitemap.xml
+Sitemap: https://example.com/sitemap-blog.xml

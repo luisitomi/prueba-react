@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Validations\Benefits\**" />
+    <EmbeddedResource Remove="Validations\Benefits\**" />
+    <None Remove="Validations\Benefits\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="10.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Validations\" />
+  </ItemGroup>
+
+</Project>

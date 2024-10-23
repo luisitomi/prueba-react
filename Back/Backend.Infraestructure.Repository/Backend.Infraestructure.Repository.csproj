@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.90" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.15.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Backend.CrossCuting.Helpers\Backend.CrossCuting.Helpers.csproj" />
+    <ProjectReference Include="..\Backend.Domain.Entities\Backend.Domain.Entities.csproj" />
+  </ItemGroup>
+
+</Project>
