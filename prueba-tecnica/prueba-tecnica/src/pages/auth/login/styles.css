@@ -1,0 +1,101 @@
+
+
+.contenedor-formulario {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.tarjeta {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.encabezado-tarjeta {
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.titulo-tarjeta {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+.descripcion-tarjeta {
+    margin: 10px 0 0;
+    color: #666;
+    text-align: center;
+}
+
+.contenido-tarjeta {
+    padding: 20px;
+}
+
+.grupo-campo {
+    margin-bottom: 20px;
+}
+
+.input-container {
+    display: flex;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.alerta-error {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.boton-enviar {
+    width: 100%;
+    padding: 12px;
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.boton-enviar:hover {
+    background-color: #1565c0;
+}
+
+.pie-tarjeta {
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #e0e0e0;
+}
+
+.enlace-olvidar-contrasena {
+    color: #1976d2;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.enlace-olvidar-contrasena:hover {
+    text-decoration: underline;
+}
