@@ -1,9 +1,12 @@
 import {useState, useEffect} from 'react';
 import './styles.css';
-import { useLocalStorage } from '../../lib/hooks/useLocalStorage';
 import deleteIcon from '../../assets/delete-icon.jpg';
+import saveIcon from '../../assets/save-icon.webp';
+import closeIcon from '../../assets/close-icon.webp';
+import Pagination from '../../lib/components/Pagination';
+import useFetch from '../../lib/hooks/useFetch';
 
-type Row = {
+type UserRow = {
     id: number;
     nombres: string;
     apellidos: string;
@@ -13,82 +16,75 @@ type Row = {
 
 export default function HomePage() {
     const [searchTerm, setSearchTerm] = useState('');
-    const [data, setData] = useState<Row[]>([]);
-    const [loading, setLoading] = useState<boolean>(false);
-    const [deleting, setDeleting] = useState<boolean>(false);
-    const [token] = useLocalStorage('token', '');
+    const [newUser, setNewUser] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [newNames, setNewNames] = useState('');
+    const [newLastname, setNewLastname] = useState('');
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [page, setPage] = useState<number>(1);
     const [currentId, setCurrentId] = useState<string | number>(0)
+    const [isCreating, setIsCreating] = useState<boolean>(false);
+    const [ usersList, usersLoading, usersError, getUsers ] = useFetch('https://localhost:44356/api/User/Search', {
+        authorization: true,
+        method: 'POST',
+        body: JSON.stringify({
+            page,
+            total: 5,
+            search: searchTerm
+        })
+    })
+
+    const [ createdUser, creationLoading, creationError, createUser ] = useFetch('https://localhost:44356/api/User/add', {
+        authorization: true,
+        method: 'POST',
+        body: JSON.stringify({
+            id: 0,
+            user: newUser,
+            nombres: newNames,
+            apellidos: newLastname,
+            password: newPassword
+        })
+    })
+
+    const [ deletedResponse, deleting, deleteError, deleteUser ] = useFetch('https://localhost:44356/api/User/delete', {
+        authorization: true,
+        method: 'POST',
+        body: JSON.stringify({
+            id: currentId,
+        })
+    })
 
     useEffect(() => {
         getUsers();
-    }, []);
+        setIsCreating(false)
+        setNewLastname('');
+        setNewNames('');
+        setNewPassword('')
+        setNewUser('');
+        setShowModal(false);
+    }, [deletedResponse, createdUser]);
 
-    async function getUsers() {
-        setLoading(true);
-        try {
-            const response = await fetch('https://localhost:44356/api/User/Search',
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({
-                        page: 0,
-                        total: 10,
-                        search: searchTerm
-                    }),
-                });
-
-
-            if (!response.ok) {
-                throw new Error('Login failed');
-            }
-
-            const json = await response.json();
-            setData(json.data.users);
-        } catch (error: any) {}
-        finally {
-            setLoading(false);
-        }
-    }
-
-    async function handleDelete() {
-        setDeleting(true)
-        try {
-            const response = await fetch('https://localhost:44356/api/User/Delete',
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({
-                        id: currentId,
-                    }),
-                });
-
-
-            if (!response.ok) {
-                throw new Error('Login failed');
-            }
-
-            const json = await response.json();
-            if (json.valid) {
-                getUsers()
-                setShowModal(false);
-            }
-        } catch(error) {
-
-        } finally {
-            setDeleting(false)
-        }
-    }
 
     function onSelectForDeleting(id: number | string) {
         setCurrentId(id);
         setShowModal(true)
+    }
+
+    function toggleCreating() {
+        if (isCreating) {
+            setIsCreating(false)
+            setNewLastname('');
+            setNewNames('');
+            setNewPassword('')
+            setNewUser('');
+        } else {
+            setIsCreating(true)
+        }
+    }
+
+    function onPaginationChange(pageNumber: number) {
+        setPage(pageNumber);
+        getUsers();
     }
 
 
@@ -106,7 +102,8 @@ export default function HomePage() {
                     />
                     <button onClick={getUsers}>Buscar</button>
                 </div>
-                <table className={`data-table ${loading ? 'min-height' : ''}`}>
+                <button onClick={toggleCreating}>{isCreating ? 'Cancelar registro' : 'Nuevo usuario'}</button>
+                <table className={`data-table ${usersLoading ? 'min-height' : ''}`}>
                     <thead>
                     <tr>
                         <th>ID</th>
@@ -118,16 +115,66 @@ export default function HomePage() {
                     </tr>
                     </thead>
                     {
-                        loading &&
+                        usersLoading &&
                         <tbody className="loading">
                             <div className="spinner"></div>
                             <p>Cargando...</p>
                         </tbody>
                     }
                     {
-                    !loading &&
+                    !usersLoading &&
                         <tbody>
-                        {data.map((item) => (
+                            {
+                                isCreating &&
+                                <tr>
+                                    <td>--</td>
+                                    <td>
+                                        <input
+                                            type="text"
+                                            placeholder="User"
+                                            value={newUser}
+                                            onChange={(e) => setNewUser(e.target.value)}
+                                            className="search-input"
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="text"
+                                            value={newNames}
+                                            onChange={(e) => setNewNames(e.target.value)}
+                                            placeholder="Nombres"
+                                            className="search-input"
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="text"
+                                            value={newLastname}
+                                            onChange={(e) => setNewLastname(e.target.value)}
+                                            placeholder="Apellidos"
+                                            className="search-input"
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="text"
+                                            value={newPassword}
+                                            onChange={(e) => setNewPassword(e.target.value)}
+                                            placeholder="Contrasena"
+                                            className="search-input"
+                                        />
+                                    </td>
+                                    <td>
+                                    <button onClick={toggleCreating} disabled={creationLoading}>
+                                            <img src={closeIcon} alt="save button" width="20px" />
+                                        </button>
+                                        <button onClick={createUser} disabled={creationLoading}>
+                                            <img src={saveIcon} alt="save button" width="20px" />
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        {usersList?.users?.map((item: UserRow) => (
                             <tr key={item.id}>
                                 <td>{item.id}</td>
                                 <td>{item.user}</td>
@@ -144,17 +191,18 @@ export default function HomePage() {
                         </tbody>
                     }
                 </table>
-                {data.length === 0 && !loading && (
+                {usersList?.users?.length === 0 && !usersLoading && (
                     <p className="no-results">No se encontraron resultados.</p>
                 )}
+                <Pagination itemsPerPage={5} totalItems={usersList?.totalElementos} onPageChange={onPaginationChange}  />
             </div>
             {showModal && (
                 <div className="modal">
                 <div className="modal-content">
                     <p>Eliminar usuario?</p>
                     <div className='buttons-container'>
-                        <button onClick={() => setShowModal(false)}>No</button>
-                        <button onClick={handleDelete}>Si</button>
+                        <button disabled={deleting} onClick={() => setShowModal(false)}>No</button>
+                        <button disabled={deleting} onClick={deleteUser}>{deleting ? 'Cargando...' : 'Si'}</button>
                     </div>
                 </div>
                 </div>
